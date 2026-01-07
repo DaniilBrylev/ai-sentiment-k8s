@@ -60,8 +60,6 @@
 
 Client → Ingress → Service → Pod (Sentiment API)
 
-yaml
-Копировать код
 
 ---
 
@@ -71,39 +69,32 @@ yaml
 
 Запуск локального Kubernetes-кластера:
 
-```bash
 minikube start --cpus=4 --memory=8192
 Проверка состояния:
 
-bash
-Копировать код
+
 minikube status
 kubectl get nodes
 Контейнеризация приложения
 Сборка Docker-образа:
 
-bash
-Копировать код
+
 docker build -t sentiment-api:1.0 .
 Загрузка образа в Minikube:
 
-bash
-Копировать код
+
 minikube image load sentiment-api:1.0
 Развертывание в Kubernetes
+
 Применение манифестов:
 
-bash
-Копировать код
 kubectl apply -f k8s/namespace.yaml
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 kubectl apply -f k8s/ingress.yaml
 kubectl apply -f k8s/hpa.yaml
-Проверка развертывания:
 
-bash
-Копировать код
+Проверка развертывания:
 kubectl get pods -n ai-demo
 kubectl get svc -n ai-demo
 kubectl get ingress -n ai-demo
@@ -111,29 +102,18 @@ kubectl get hpa -n ai-demo
 Проверка работы приложения
 Получение URL сервиса:
 
-bash
-Копировать код
+
 minikube service sentiment-api -n ai-demo --url
 Пример HTTP-запроса:
 
-bash
-Копировать код
 curl "http://<URL>/api/sentiment?text=hello"
-Пример ответа:
 
-json
-Копировать код
-{
-  "sentiment": "positive"
-}
 Мониторинг
 Для мониторинга состояния приложения и кластера используется стек
 Prometheus + Grafana.
 
 Установка через Helm:
 
-bash
-Копировать код
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 helm install monitoring prometheus-community/kube-prometheus-stack
@@ -164,7 +144,7 @@ serverless-подходы к развертыванию машинного об�
 Подробный анализ представлен в отчете проекта.
 
 Структура репозитория
-Копировать код
+
 .
 ├── sentiment-k8s-project/
 │   ├── app/
